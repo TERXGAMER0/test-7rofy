@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", function () {
       .catch(err => console.error("Error during verification:", err));
   });
   
-  // --- كود اللعبة الأصلي (HexGame) ---
+  // --- كود لعبة الحروف (HexGame) ---
   class HexGame {
     constructor() {
       this.hexagons = [];
@@ -279,7 +279,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
   
-  // بدء تشغيل اللعبة
+  // بدء تشغيل اللعبة عند تحميل الصفحة
   window.onload = () => {
     const game = new HexGame();
     game.moveEntireRowX(0, 100);
@@ -294,12 +294,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const dwarfsContainer = document.getElementById("dwarfs-container");
   
   winButton.addEventListener("click", () => {
-    // عرض شاشة الاحتفالية
     celebrationOverlay.style.display = "flex";
-    // تشغيل صوت الفوز
     winSound.currentTime = 0;
     winSound.play().catch(err => console.error("Win sound error:", err));
-    // إنشاء تأثير "ألواح ذهبية" عشوائية
+    // إنشاء تأثير "ألواح ذهبية"
     for (let i = 0; i < 20; i++) {
       const bar = document.createElement("div");
       bar.className = "golden-bar";
@@ -307,16 +305,15 @@ document.addEventListener("DOMContentLoaded", function () {
       bar.style.animationDelay = Math.random() * 1 + "s";
       goldenBarsContainer.appendChild(bar);
     }
-    // إنشاء تأثير "أقزام راقصة" (يمكن استبدالها بصور إذا توفرت)
+    // إنشاء تأثير "أقزام راقصة"
     for (let j = 0; j < 5; j++) {
       const dwarf = document.createElement("div");
       dwarf.className = "dancing-dwarf";
-      dwarf.textContent = "⚡";
+      dwarf.textContent = "💃";
       dwarf.style.left = Math.random() * 100 + "%";
       dwarf.style.animationDelay = Math.random() * 0.5 + "s";
       dwarfsContainer.appendChild(dwarf);
     }
-    // إزالة الاحتفالية بعد 5 ثوانٍ
     setTimeout(() => {
       celebrationOverlay.style.display = "none";
       goldenBarsContainer.innerHTML = "";
@@ -325,7 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
   
-/* الكود الخاص بتهيئة إطار تحدي Cloudflare - تركه كما هو */
+/* كود تهيئة إطار Cloudflare (تركه كما هو) */
 (function () {
   function c() {
     var b = a.contentDocument || a.contentWindow.document;
