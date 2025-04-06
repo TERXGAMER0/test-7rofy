@@ -1,6 +1,7 @@
-// ---------------------- التحقق من رمز التفعيل ----------------------
+// استدعاء زر التحقق من رمز التفعيل وإرساله إلى الخادم للتحقق
 document.getElementById("secret-submit").addEventListener("click", function () {
   var code = document.getElementById("secret-code").value.trim();
+
   fetch('/api/verify', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -14,10 +15,10 @@ document.getElementById("secret-submit").addEventListener("click", function () {
         document.getElementById("error-message").style.display = "block";
       }
     })
-    .catch(err => console.error("Error during verification:", err));
+    .catch(err => console.error('Error:', err));
 });
 
-// ---------------------- كود لعبة الحروف الأصلي ----------------------
+// كود لعبة الحروف (HexGame) من ملف index.html
 class HexGame {
   constructor() {
     this.hexagons = [];
@@ -40,10 +41,10 @@ class HexGame {
       { x: 2, y: 162 }
     ];
 
-    // الإزاحة العامة
+    // إزاحة عامة لنقل الشكل كاملًا
     this.globalOffset = { x: 305, y: 300 };
 
-    // تغيير حجم الخلايا
+    // إعدادات تغيير حجم الخلايا
     this.cellScales = [
       [2, 2, 2, 2, 2],
       [2, 2, 2, 2, 2],
@@ -177,6 +178,8 @@ class HexGame {
     this.backgroundImagePath2 = "IMG_7904.png";
     this.backgroundPosition2 = { x: -900, y: -250 };
     this.backgroundSize2 = { width: 2700, height: 2000 };
+    this.backgroundViewSize2 = { width: 3000, height: 2000 };
+
     const container = document.getElementById("grid");
     const imgDiv2 = document.createElement("div");
     imgDiv2.className = "bgImage2";
@@ -196,6 +199,8 @@ class HexGame {
     this.backgroundImagePath3 = "IMG_7750.PNG";
     this.backgroundPosition3 = { x: 380, y: 200 };
     this.backgroundSize3 = { width: 300, height: 120 };
+    this.backgroundViewSize3 = { width: 300, height: 200 };
+
     const container = document.getElementById("grid");
     const imgDiv3 = document.createElement("div");
     imgDiv3.className = "bgImage3";
@@ -215,6 +220,8 @@ class HexGame {
     this.backgroundImagePath4 = "IMAGE4.png";
     this.backgroundPosition4 = { x: 750, y: 150 };
     this.backgroundSize4 = { width: 320, height: 240 };
+    this.backgroundViewSize4 = { width: 320, height: 240 };
+
     const container = document.getElementById("grid");
     const imgDiv4 = document.createElement("div");
     imgDiv4.className = "bgImage4";
@@ -252,10 +259,10 @@ class HexGame {
   }
 
   initAdditionalText2() {
-    this.textContent2 = "النص الثاني";
-    this.textPosition2 = { x: 300, y: 600 };
-    this.textSize2 = { width: 250, height: 50 };
-    this.textFontSize2 = 0;
+    this.textContent2 = "jifn للأستفسار اسم حسابي في التيك توك هو ";
+    this.textPosition2 = { x: 250, y: 1100 };
+    this.textSize2 = { width: 700, height: 50 };
+    this.textFontSize2 = 40;
     const container = document.getElementById("grid");
     const textDiv2 = document.createElement("div");
     textDiv2.className = "additionalText2";
@@ -294,96 +301,81 @@ class HexGame {
   }
 }
 
-// ---------------------- إضافة ميزة زر الاحتفال ----------------------
-
-// لوحة تحكم داخلية لضبط حجم وموقع زر الاحتفال (يمكن تعديل القيم هنا)
-const celebrationConfig = {
-  buttonSize: 60,  // حجم الزر بالبيكسل
-  posX: 0,         // إزاحة X (يمكن تعديلها)
-  posY: 20         // إزاحة Y (يمكن تعديلها)
+// ======== الإعدادات الإضافية للاحتفالية ==========
+const celebrationSettings = {
+  btnX: 305,    // إحداثيات زر الاحتفالية (محور X)
+  btnY: 950,    // إحداثيات زر الاحتفالية (محور Y)
+  btnWidth: 150,
+  btnHeight: 50
 };
 
-const celebrateBtn = document.getElementById("celebrateBtn");
-celebrateBtn.style.width = celebrationConfig.buttonSize + "px";
-celebrateBtn.style.height = celebrationConfig.buttonSize + "px";
-celebrateBtn.style.borderRadius = "8px";
-celebrateBtn.style.border = "2px solid #000";
-celebrateBtn.style.backgroundColor = "#ffd700";
-celebrateBtn.style.color = "#000";
-celebrateBtn.style.cursor = "pointer";
-celebrateBtn.style.position = "relative";
-celebrateBtn.style.left = celebrationConfig.posX + "px";
-celebrateBtn.style.top = celebrationConfig.posY + "px";
+document.addEventListener("DOMContentLoaded", function(){
+  const btn = document.getElementById("celebration-btn");
+  if (btn) {
+    btn.style.position = "absolute";
+    btn.style.left = celebrationSettings.btnX + "px";
+    btn.style.top = celebrationSettings.btnY + "px";
+    btn.style.width = celebrationSettings.btnWidth + "px";
+    btn.style.height = celebrationSettings.btnHeight + "px";
+  }
+});
 
-// دالة بدء الاحتفال
 function triggerCelebration() {
-  const celebrationContainer = document.getElementById("celebrationContainer");
-  const celebrationText = document.getElementById("celebrationText");
-  const partySound1 = document.getElementById("partySound1");
-
-  // إظهار حاوية الاحتفال
-  celebrationContainer.style.display = "block";
-  celebrationText.style.display = "block";
-
   // تشغيل الصوت
-  partySound1.currentTime = 0;
-  partySound1.play().catch(err => console.error("Error playing party sound:", err));
+  const audio = new Audio("party1.mp3");
+  audio.play();
 
-  // إنشاء تأثيرات احتفالية ديناميكية
-  createCelebrationEffects();
+  // إنشاء شرائط ذهبية تسقط من الأعلى
+  for (let i = 0; i < 10; i++) {
+    const stripe = document.createElement("div");
+    stripe.className = "golden-stripe";
+    stripe.style.left = Math.random() * window.innerWidth + "px";
+    stripe.style.top = "-50px";
+    document.body.appendChild(stripe);
+  }
 
-  // تطبيق تأثير خلفية شقلبة
-  document.body.classList.add("flip-background");
+  // إنشاء حروف عربية من كلمة "مبروك" بألوان مختلفة تتطاير من الجهتين
+  const letters = ["م", "ب", "ر", "و", "ك"];
+  const colors = ["red", "blue", "green", "orange", "purple"];
+  letters.forEach((letter, index) => {
+    const flyLetter = document.createElement("div");
+    flyLetter.className = "flying-letter";
+    flyLetter.textContent = letter;
+    flyLetter.style.color = colors[index % colors.length];
+    if (Math.random() > 0.5) {
+      flyLetter.style.left = "-100px";
+      flyLetter.style.top = Math.random() * window.innerHeight + "px";
+      flyLetter.style.animationName = "flyInRight";
+    } else {
+      flyLetter.style.right = "-100px";
+      flyLetter.style.top = Math.random() * window.innerHeight + "px";
+      flyLetter.style.animationName = "flyInLeft";
+    }
+    flyLetter.style.animationDuration = "10s";
+    document.body.appendChild(flyLetter);
+  });
 
-  // الاحتفال يستمر 10 ثواني ثم يتم إيقافه
+  // إنشاء نص "مبروووك" متحرك في منتصف الشاشة
+  const celebrationText = document.createElement("div");
+  celebrationText.id = "celebration-text";
+  celebrationText.textContent = "مبروووك";
+  document.body.appendChild(celebrationText);
+
+  // إنشاء روبوت يقوم بشقلبة (باستخدام رمز تعبيري)
+  const robot = document.createElement("div");
+  robot.id = "celebration-robot";
+  robot.textContent = "🤖";
+  document.body.appendChild(robot);
+
+  // إزالة عناصر الاحتفالية بعد 10 ثوانٍ
   setTimeout(() => {
-    celebrationContainer.style.display = "none";
-    celebrationText.style.display = "none";
-    removeCelebrationEffects();
-    document.body.classList.remove("flip-background");
-    partySound1.pause();
-    partySound1.currentTime = 0;
+    document.querySelectorAll(".golden-stripe, .flying-letter, #celebration-text, #celebration-robot").forEach(el => el.remove());
   }, 10000);
 }
 
-// إنشاء تأثيرات الاحتفال (مثال: روايات ذهبية وحروف طائرة)
-function createCelebrationEffects() {
-  const container = document.getElementById("celebrationContainer");
-  // إنشاء 5 عناصر للروايات الذهبية
-  for (let i = 0; i < 5; i++) {
-    const ribbon = document.createElement("div");
-    ribbon.className = "ribbon";
-    ribbon.style.left = Math.random() * 100 + "%";
-    container.appendChild(ribbon);
-  }
-  // إنشاء 10 حروف طائرة
-  for (let i = 0; i < 10; i++) {
-    const letter = document.createElement("div");
-    letter.className = "flying-letter";
-    const letters = ["أ", "ب", "ت", "ث", "ج", "ح", "خ", "د", "ذ", "ر", "ز", "س", "ش", "ص", "ض", "ط", "ظ", "ع", "غ", "ف", "ق", "ك", "ل", "م", "ن", "ه", "و", "ي"];
-    letter.textContent = letters[Math.floor(Math.random() * letters.length)];
-    letter.style.color = '#' + Math.floor(Math.random()*16777215).toString(16);
-    letter.style.left = Math.random() < 0.5 ? "-50px" : "110%";
-    container.appendChild(letter);
-  }
-}
+document.getElementById("celebration-btn").addEventListener("click", triggerCelebration);
 
-// إزالة التأثيرات الاحتفالية المُضافة
-function removeCelebrationEffects() {
-  const container = document.getElementById("celebrationContainer");
-  while (container.firstChild) {
-    if (container.firstChild.id !== "celebrationText") {
-      container.removeChild(container.firstChild);
-    } else {
-      break;
-    }
-  }
-}
-
-// إضافة مستمع لزر الاحتفال
-celebrateBtn.addEventListener("click", triggerCelebration);
-
-// ---------------------- باقي كود اللعبة (HexGame) ----------------------
+// بدء تشغيل اللعبة عند تحميل الصفحة
 window.onload = () => {
   const game = new HexGame();
   game.moveEntireRowX(0, 100);
