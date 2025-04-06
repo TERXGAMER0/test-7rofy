@@ -1,65 +1,90 @@
 /* تصميم الواجهة الأمنية */
 #secret-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(75, 0, 130, 0.9); /* بنفسجي غامق */
-    z-index: 10000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .secret-container {
-    text-align: center;
-    background: #fff;
-    padding: 20px;
-    border-radius: 10px;
-  }
-  
-  .secret-container h2 {
-    margin-bottom: 15px;
-    font-family: "Simplified Arabic";
-  }
-  
-  .secret-container input {
-    padding: 10px;
-    font-size: 16px;
-    width: 250px;
-    margin-bottom: 10px;
-  }
-  
-  .secret-container button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-  }
-  
-  /* تنسيقات عناصر اللعبة */
-  .container {
-    position: relative;
-    margin: 50px auto;
-    width: 700px;
-  }
-  
-  .hexagon {
-    position: absolute;
-    width: 50px;
-    height: 55px;
-    background-color: #ffffff;
-    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: background-color 0.3s, left 0.3s, top 0.3s;
-    font-family: "Simplified Arabic";
-    font-size: 24px;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(75, 0, 130, 0.9); /* بنفسجي غامق */
+  z-index: 10000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
-/* الأنيميشنات والمؤثرات الخاصة بالاحتفالية */
+.secret-container {
+  text-align: center;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.secret-container h2 {
+  margin-bottom: 15px;
+  font-family: "Simplified Arabic";
+}
+
+.secret-container input {
+  padding: 10px;
+  font-size: 16px;
+  width: 250px;
+  margin-bottom: 10px;
+}
+
+.secret-container button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* تنسيقات عناصر اللعبة */
+.container {
+  position: relative;
+  margin: 50px auto;
+  width: 700px;
+}
+
+/* تنسيق الخلايا السداسية */
+.hexagon {
+  position: absolute;
+  width: 50px;
+  height: 55px;
+  background-color: #ffffff;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.3s, left 0.3s, top 0.3s;
+  font-family: "Simplified Arabic";
+  font-size: 24px;
+}
+
+/* زر الاحتفالية والتنسيقات المحسنة */
+#celebration-container {
+  text-align: center;
+  margin: 20px auto;
+}
+
+#celebration-btn {
+  background: linear-gradient(45deg, #ff6f61, #d7263d);
+  color: white;
+  border: none;
+  padding: 15px 30px;
+  font-size: 20px;
+  cursor: pointer;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+
+#celebration-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* أنيميشنات ومؤثرات الاحتفالية */
 
 @keyframes fallDown {
   from { top: -100px; }
@@ -87,25 +112,15 @@
 
 .flying-letter {
   position: absolute;
-  font-size: 30px;
   animation-fill-mode: forwards;
   z-index: 1000;
 }
 
-@keyframes robotFlip {
-  0% { transform: translateY(0) rotate(0deg); }
-  50% { transform: translateY(-50px) rotate(180deg); }
-  100% { transform: translateY(0) rotate(360deg); }
-}
-
-#celebration-robot {
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 50px;
-  animation: robotFlip 10s ease-in-out;
-  z-index: 1000;
+/* أنيميشن نص الاحتفالية */
+@keyframes textAnimation {
+  0% { opacity: 0; transform: translate(-50%, -60%) scale(0.5); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+  100% { opacity: 0; transform: translate(-50%, -40%) scale(1); }
 }
 
 #celebration-text {
@@ -120,19 +135,19 @@
   color: red;
 }
 
-@keyframes textAnimation {
-  0% { opacity: 0; transform: translate(-50%, -60%) scale(0.5); }
-  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
-  100% { opacity: 0; transform: translate(-50%, -40%) scale(1); }
+/* أنيميشن الروبوت */
+@keyframes robotFlip {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-50px) rotate(180deg); }
+  100% { transform: translateY(0) rotate(360deg); }
 }
 
-/* تنسيق زر الاحتفالية */
-#celebration-btn {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 10px;
-  font-size: 18px;
-  cursor: pointer;
-  border-radius: 5px;
+#celebration-robot {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 50px;
+  animation: robotFlip 10s ease-in-out;
+  z-index: 1000;
 }
