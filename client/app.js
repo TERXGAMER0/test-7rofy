@@ -304,13 +304,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // دالة تشغيل الاحتفالية
   function triggerCelebration() {
-    console.log("احتفال بدأ!");
-    // تشغيل الصوت
+    console.log("بدء الاحتفالية!");
+
+    // تشغيل الصوت بسرعة
     const audio = new Audio("party1.mp3");
     audio.play().catch(err => console.error("فشل تشغيل الصوت:", err));
 
-    // إنشاء شرائط ذهبية تتساقط
-    for (let i = 0; i < 15; i++) {
+    // زيادة عدد الشرائط إلى 30 مع مدة 3 ثوانٍ
+    for (let i = 0; i < 30; i++) {
       const stripe = document.createElement("div");
       stripe.className = "golden-stripe";
       stripe.style.left = Math.random() * window.innerWidth + "px";
@@ -318,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function() {
       document.body.appendChild(stripe);
     }
 
-    // إنشاء حروف "مبروك" تتطاير بألوان مختلفة
+    // إنشاء حروف "مبروك" تطير بألوان مختلفة من الجانبين مع مدة أسرع (1.5 ثانية)
     const letters = ["م", "ب", "ر", "و", "ك"];
     const colors = ["#e74c3c", "#3498db", "#2ecc71", "#f1c40f", "#9b59b6"];
     letters.forEach((letter, index) => {
@@ -327,7 +328,7 @@ document.addEventListener("DOMContentLoaded", function() {
       flyLetter.textContent = letter;
       flyLetter.style.color = colors[index % colors.length];
       flyLetter.style.fontSize = "40px";
-      // تحديد اتجاه الحركة عشوائيًا
+      // تعيين حركة عشوائية من اليسار أو اليمين
       if (Math.random() > 0.5) {
         flyLetter.style.left = "-100px";
         flyLetter.style.top = Math.random() * window.innerHeight + "px";
@@ -337,27 +338,28 @@ document.addEventListener("DOMContentLoaded", function() {
         flyLetter.style.top = Math.random() * window.innerHeight + "px";
         flyLetter.style.animationName = "flyInLeft";
       }
-      flyLetter.style.animationDuration = "3s";
+      flyLetter.style.animationDuration = "1.5s";
       flyLetter.style.animationFillMode = "forwards";
       document.body.appendChild(flyLetter);
     });
 
-    // إنشاء نص "مبروك" متحرك في منتصف الشاشة
+    // إنشاء نص "مبروك" متحرك في منتصف الشاشة بمدة 3 ثوانٍ
     const celebrationText = document.createElement("div");
     celebrationText.id = "celebration-text";
     celebrationText.textContent = "مبروك";
     document.body.appendChild(celebrationText);
 
-    // إنشاء روبوت يقوم بشقلبة
-    const robot = document.createElement("div");
+    // إنشاء روبوت كامل يقوم بشقلبة الخلفية باستخدام صورة (يفترض وجود robot.png)
+    const robot = document.createElement("img");
     robot.id = "celebration-robot";
-    robot.textContent = "🤖";
+    robot.src = "robot.png";
+    robot.alt = "روبوت";
     document.body.appendChild(robot);
 
-    // إزالة عناصر الاحتفالية بعد 10 ثوانٍ
+    // إزالة عناصر الاحتفالية بعد 3 ثوانٍ
     setTimeout(() => {
       document.querySelectorAll(".golden-stripe, .flying-letter, #celebration-text, #celebration-robot").forEach(el => el.remove());
-    }, 10000);
+    }, 3000);
   }
 
   // إضافة مستمع لزر الاحتفالية
