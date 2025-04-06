@@ -19,11 +19,11 @@ app.post('/api/verify', (req, res) => {
 });
 
 // تقديم الملفات الثابتة من مجلد public
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client')));
 
 // أي طلب غير معرف يعيد صفحة h1-index.html (الصفحة الرئيسية)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'h1-index.html'));
+  res.sendFile(path.join(__dirname, 'client', 'h1-index.html'));
 });
 
 app.listen(PORT, () => {
