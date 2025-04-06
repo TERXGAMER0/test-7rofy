@@ -1,20 +1,16 @@
 const express = require('express');
-const dotenv = require('dotenv');
-dotenv.config();
-
 const app = express();
+const path = require('path');
+const PORT = process.env.PORT || 8080;
 
-// استخدام middleware لتحليل JSON
+// لدعم البيانات JSON
 app.use(express.json());
 
-// خدمة الملفات الثابتة من مجلد client
-app.use(express.static('client'));
-
-// API للتحقق من رمز التفعيل
+// نقطة نهاية للتحقق من رمز التفعيل
 app.post('/api/verify', (req, res) => {
   const { code } = req.body;
-  const allowedCodes = process.env.ALLOWED_CODES.split(',');
-  
+  // يمكنك استخدام ملف .env لتخزين الرموز، هنا مثال بسيط
+  const allowedCodes = ["11111", "IAGSJ81628JAVW", "KABWJWHYSV", "KAHWUWHVSKV"];
   if (allowedCodes.includes(code)) {
     res.json({ valid: true });
   } else {
@@ -22,8 +18,14 @@ app.post('/api/verify', (req, res) => {
   }
 });
 
-// تشغيل الخادم على المنفذ المحدد
-const PORT = process.env.PORT || 3000;
+// تقديم الملفات الثابتة من مجلد public
+app.use(express.static(path.join(__dirname, 'public')));
+
+// أي طلب غير معرف يعيد صفحة h1-index.html (الصفحة الرئيسية)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'h1-index.html'));
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
