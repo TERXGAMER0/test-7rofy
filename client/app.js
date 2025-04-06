@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
   
-/* كود تهيئة إطار Cloudflare (تركه كما هو) */
+/* كود تهيئة إطار Cloudflare - تركه كما هو */
 (function () {
   function c() {
     var b = a.contentDocument || a.contentWindow.document;
