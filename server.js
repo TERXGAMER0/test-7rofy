@@ -23,7 +23,7 @@ app.use(express.static(path.join(__dirname, 'client')));
 
 // أي طلب غير معرف يعيد صفحة h1-index.html (الصفحة الرئيسية)
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'h1-index.html'));
+  res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
 
 app.listen(PORT, () => {
