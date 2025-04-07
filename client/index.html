@@ -1,36 +1,24 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8" />
-    <title>لعبة الحروف والاحتفالية</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <!-- واجهة التحقق من الرمز السري -->
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لعبة الحروف</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
     <div id="secret-overlay">
-      <div class="secret-container">
-        <h2>أدخل رمز التفعيل المجاني للدخول</h2>
-        <input type="text" id="secret-code" placeholder="الرمز السري" />
-        <br />
-        <button id="secret-submit">ادخال</button>
-        <p id="error-message" style="color: red; display: none">
-          رمز خاطئ، حاول مرة أخرى
-        </p>
-        <p style="font-size: 17px; margin-top: 10px">
-          اذا لم يكن لديك رمز تفعيل، يمكنك الحصول عليه مجانًا في بوت التيليجرام:
-          <a href="https://t.me/ii40TSM_bot" target="_blank">اضغط هنا</a>
-        </p>
-      </div>
+        <div class="secret-container">
+            <h2>أدخل رمز التفعيل المجاني للدخول</h2>
+            <input type="text" id="secret-code" placeholder="أدخل الرمز هنا">
+            <button id="secret-submit">دخول</button>
+            <p id="error-message" style="display: none; color: red;">رمز خاطئ، حاول مرة أخرى</p>
+            <p>اذا لم يكن لديك رمز تفعيل ، يمكنك الحصول عليه مجانًا في بوت في التيليجرام <a href="#">هذا هو الرابط اضغط هنا</a></p>
+        </div>
     </div>
 
-    <!-- عنصر الحاوية الذي تُعرض فيه الخلايا والخلفيات والنصوص -->
-    <div class="container" id="grid"></div>
-    
-    <!-- زر الاحتفالية الجديد -->
-    <div id="celebration-container">
-      <button id="celebration-btn">احتفل الآن!</button>
-    </div>
+    <div id="grid" class="container"></div>
 
     <script src="app.js"></script>
-  </body>
+</body>
 </html>
